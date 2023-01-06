@@ -1,0 +1,79 @@
+{% extends "todo/base_page.html" %}
+{% block content %}
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Is Finished</th>
+                    <th scope="col">Finished At</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>        
+            {% for object in object_list %}
+            <tr class="cursor-pointer">
+                <td>{{ object.title }}</td>
+                <td>{{ object.description }}</td>
+                <td>{{ object.priority }}</td>
+                <td>{{ object.category.title }}</td>
+                <td>{{ object.created }}</td>
+                <td>{{ object.is_finished }}</td>
+                <td>{{ object.finished_at }}</td>
+                <td>
+                  <a class="btn btn-sm btn-secondary edit-button" data-bs-toggle="modal" data-bs-target="#updateTaskModal" data-updateurl="{% url "todo:update" object.id %}"">Edit</a>
+                  <a class="btn btn-sm btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteTaskConfirmModal" data-deleteurl="{% url "todo:delete" object.id %}">X</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>No objects yet.</tr>
+            {% endfor %}
+        </table>
+        <div class="row">
+          <div class="col-1">
+              <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createTaskModal">+</a>
+          </div>
+      </div>
+    </div>
+    <div id="createTaskModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Task</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {% include "todo/task_form.html" %}
+            </div>
+          </div>
+        </div>
+    </div>
+    <div id="updateTaskModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Update Task</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="updateTaskModalBody" class="modal-body">
+            </div>
+          </div>
+        </div>
+    </div>
+    <div id="deleteTaskConfirmModal" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div id="deleteTaskConfirmModalBody" class="modal-body">
+          </div>
+        </div>
+      </div>
+  </div>
+      
+{% endblock %}
