@@ -8,10 +8,12 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
 
-PROFILE = os.environ.get('PROCRASTINATE_ENVIRONMENT')
+from decouple import config
+
+
+PROFILE = config('PROCRASTINATE_ENVIRONMENT')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'procrastinate.settings.' + PROFILE + '.profile')
 
