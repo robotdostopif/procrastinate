@@ -2,9 +2,11 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from decouple import config
 
 
-PROFILE = os.environ.get('PROCRASTINATE_ENVIRONMENT', "development")
+PROFILE = config('PROCRASTINATE_ENVIRONMENT')
+
 
 
 def main():
