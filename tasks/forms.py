@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from todo.models import Category, PlanningUser, Task
+from tasks.models import Category, PlanningUser, Task
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, HTML, Submit, Row, Column
 from django.contrib.auth.forms import UserCreationForm
@@ -21,7 +21,7 @@ class TaskForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_action = 'todo:create'
+        self.helper.form_action = 'tasks:create'
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'form-label create-label'

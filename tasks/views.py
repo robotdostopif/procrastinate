@@ -9,16 +9,16 @@ from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 
-from todo.models import PlanningUser, Task
-from todo.forms import TaskForm, UserSignInForm, UserSignUpForm
+from tasks.models import PlanningUser, Task
+from tasks.forms import TaskForm, UserSignInForm, UserSignUpForm
 
 from django.views.generic.edit import FormView
 
 class UserSignup(CreateView):
-    template_name = 'todo/signup.html'
+    template_name = 'tasks/signup.html'
     form_class = UserSignUpForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('todo:login')
+    success_url = reverse_lazy('tasks:login')
     def form_valid(self, form):
         if form.is_valid():
             with transaction.atomic():
@@ -30,18 +30,18 @@ class UserSignup(CreateView):
     
     
 class UserLogin(LoginView):
-    template_name = 'todo/signin.html'
+    template_name = 'tasks/signin.html'
     fields = '__all__'
     redirect_authenticated_user = True
     form_class = UserSignInForm
 
     def get_success_url(self):
-        return reverse_lazy('todo:all')
+        return reverse_lazy('tasks:all')
 
 
 class TaskBaseView(LoginRequiredMixin, View):
     model = Task
-    success_url = reverse_lazy('todo:all')
+    success_url = reverse_lazy('tasks:all')
 
 
 class TaskListView(TaskBaseView, ListView, FormView):
@@ -52,7 +52,6 @@ class TaskListView(TaskBaseView, ListView, FormView):
             queryset = self.model.objects.all()
         else:
             queryset = self.model.objects.filter(planning_user__user=self.request.user)
-
         return queryset
 
 
