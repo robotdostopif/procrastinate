@@ -1,11 +1,11 @@
-{% extends "todo/base_page.html" %}
+{% extends "tasks/base_page.html" %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container">
     <h2>Sign in</h2>
     {% crispy form %}
-	<a href="{% url 'todo:signup' %}">Create Account here.</a>
+	<a href="{% url 'tasks:signup' %}">Create Account here.</a>
 </div>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends "todo/base_page.html" %}
+{% extends "tasks/base_page.html" %}
 {% block content %}
     <div class="container">
         <table class="table table-hover">
@@ -24,9 +24,9 @@
                 <td>{{ object.is_finished }}</td>
                 <td>{{ object.finished_at }}</td>
                 <td>
-                  <a class="btn btn-sm btn-secondary finish-button" data-finishurl="{% url "todo:finish" object.id %}">{% if object.is_finished == True %}UnFinish{% else %}Finish{% endif %}</a>
-                  <a class="btn btn-sm btn-secondary edit-button" data-bs-toggle="modal" data-bs-target="#updateTaskModal" data-updateurl="{% url "todo:update" object.id %}"">Edit</a>
-                  <a class="btn btn-sm btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteTaskConfirmModal" data-deleteurl="{% url "todo:delete" object.id %}">X</a>
+                  <a class="btn btn-sm btn-secondary finish-button" data-finishurl="{% url "tasks:finish" object.id %}">{% if object.is_finished == True %}UnFinish{% else %}Finish{% endif %}</a>
+                  <a class="btn btn-sm btn-secondary edit-button" data-bs-toggle="modal" data-bs-target="#updateTaskModal" data-updateurl="{% url "tasks:update" object.id %}"">Edit</a>
+                  <a class="btn btn-sm btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteTaskConfirmModal" data-deleteurl="{% url "tasks:delete" object.id %}">X</a>
                 </td>
             </tr>
             {% empty %}
@@ -47,7 +47,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              {% include "todo/task_form.html" %}
+              {% include "tasks/task_form.html" %}
             </div>
           </div>
         </div>

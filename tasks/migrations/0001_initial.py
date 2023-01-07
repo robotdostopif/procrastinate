@@ -42,8 +42,8 @@ class Migration(migrations.Migration):
                 ('is_finished', models.BooleanField(blank=True, default=False)),
                 ('created', models.DateTimeField(blank=True, default=datetime.datetime(2023, 1, 7, 19, 13, 15, 311509, tzinfo=datetime.timezone.utc))),
                 ('finished_at', models.DateTimeField(blank=True, null=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='todo.category')),
-                ('planning_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='todo.planninguser')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tasks.category')),
+                ('planning_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tasks.planninguser')),
             ],
         ),
     ]

@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
 
-app_name="todo"
+app_name="tasks"
 
 urlpatterns = [
     path('', views.TaskListView.as_view(), name='all'),
@@ -13,5 +13,5 @@ urlpatterns = [
     path('task/<int:pk>/delete/', views.TaskDeleteView.as_view(), name='delete'),
     path('signup/', views.UserSignup.as_view(), name='signup'),
 	path('login/', views.UserLogin.as_view(), name='login'),
-	path('logout/', LogoutView.as_view(next_page='todo:login'), name='logout')
+	path('logout/', LogoutView.as_view(next_page='tasks:login'), name='logout')
 ]

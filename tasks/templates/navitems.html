@@ -2,7 +2,7 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     <li class="nav-item">
-        <a class="nav-link text-secondary" aria-current="page" href={% url "todo:all" %}>Home</a>
+        <a class="nav-link text-secondary" aria-current="page" href={% url "tasks:all" %}>Home</a>
     </li>
 </ul>
 {% if request.user.is_authenticated %}
@@ -11,7 +11,7 @@
                 <a class="nav-link text-secondary" aria-current="page"><i class="fa-solid fa-circle-user"></i><spacer> {{request.user.username}}</spacer></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-secondary" aria-current="page" href={% url "todo:logout" %}>Logout</a>
+            <a class="nav-link text-secondary" aria-current="page" href={% url "tasks:logout" %}>Logout</a>
         </li>
     </ul>
 {% endif %}
