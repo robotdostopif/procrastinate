@@ -52,7 +52,6 @@ class TaskListView(TaskBaseView, ListView, FormView):
             queryset = self.model.objects.all()
         else:
             queryset = self.model.objects.filter(planning_user__user=self.request.user)
-
         return queryset
 
 

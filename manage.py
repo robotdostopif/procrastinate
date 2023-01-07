@@ -4,9 +4,12 @@ import os
 import sys
 
 
+PROFILE = os.environ.get('HILMA_ENVIRONMENT', "development")
+
+
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'procrastinate.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'procrastinate.settings.' + PROFILE + '.profile')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
