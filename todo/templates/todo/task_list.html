@@ -24,6 +24,7 @@
                 <td>{{ object.is_finished }}</td>
                 <td>{{ object.finished_at }}</td>
                 <td>
+                  <a class="btn btn-sm btn-secondary finish-button" data-finishurl="{% url "todo:finish" object.id %}">{% if object.is_finished == True %}UnFinish{% else %}Finish{% endif %}</a>
                   <a class="btn btn-sm btn-secondary edit-button" data-bs-toggle="modal" data-bs-target="#updateTaskModal" data-updateurl="{% url "todo:update" object.id %}"">Edit</a>
                   <a class="btn btn-sm btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteTaskConfirmModal" data-deleteurl="{% url "todo:delete" object.id %}">X</a>
                 </td>

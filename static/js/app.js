@@ -44,4 +44,11 @@ $(document).ready(function() {
             $('#deleteTaskConfirmModalBody').find("form").attr('action', deleteUrl);
         });
     });
+
+    $(document).on('click', 'a.finish-button', function(e) {
+        var deleteUrl = $(this).data("finishurl");
+        $.post(deleteUrl, function(data) {
+            location.reload();
+        });
+    });
 })
