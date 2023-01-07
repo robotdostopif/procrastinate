@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 # TODO: Have a thought about current state as Charfield for each task i.e either in "Started", "In Progress" or "Almost Done"
 
@@ -12,6 +13,7 @@ class Task(models.Model):
     is_finished = models.BooleanField(default=False, blank=True)
     created = models.DateTimeField(default=timezone.now(), blank=True)
     finished_at = models.DateTimeField(null=True, blank=True)
+    planning_user = models.ForeignKey('PlanningUser', on_delete=models.CASCADE)
     
     def __str__(self):
         return self.title
@@ -22,4 +24,12 @@ class Category(models.Model):
     
     def __str__(self):
         return self.title
+    
+    
+class PlanningUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return self.name
 
