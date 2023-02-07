@@ -9,8 +9,8 @@ from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 
-from tasks.models import PlanningUser, Task
-from tasks.forms import TaskForm, UserSignInForm, UserSignUpForm
+from tasks.models import Category, AppUser, Task
+from tasks.forms import CategoryForm, TaskForm, UserSignInForm, UserSignUpForm
 
 from django.views.generic.edit import FormView
 
@@ -23,7 +23,7 @@ class UserSignup(CreateView):
         if form.is_valid():
             with transaction.atomic():
                 user = form.save()
-                PlanningUser.objects.create(user=user, name=user.username)
+                AppUser.objects.create(user=user, name=user.username)
         else:
             print(form.errors)
         return super(UserSignup, self).form_valid(form)
@@ -51,8 +51,13 @@ class TaskListView(TaskBaseView, ListView, FormView):
         if self.request.user.is_superuser:
             queryset = self.model.objects.all()
         else:
-            queryset = self.model.objects.filter(planning_user__user=self.request.user)
+            queryset = self.model.objects.filter(app_user__user=self.request.user)
         return queryset
+    
+    def get_context_data(self,*args, **kwargs):
+        context = super(TaskListView, self).get_context_data(*args,**kwargs)
+        context["category_form"] = CategoryForm()
+        return context
 
 
 class TaskDetailView(TaskBaseView, DetailView):
@@ -66,7 +71,7 @@ class TaskCreateView(TaskBaseView, CreateView):
     
     def form_valid(self, form):
         if form.is_valid():
-            form.instance.planning_user = PlanningUser.objects.get(user=self.request.user)
+            form.instance.app_user = AppUser.objects.get(user=self.request.user)
             form.save()
         else:
             print(form.errors)
@@ -76,7 +81,7 @@ class TaskUpdateView(TaskBaseView, UpdateView):
     form_class = TaskForm
     def form_valid(self, form):
         if form.is_valid():
-            form.instance.planning_user = PlanningUser.objects.get(user=self.request.user)
+            form.instance.app_user = AppUser.objects.get(user=self.request.user)
             form.save()
         else:
             print(form.errors)
@@ -93,3 +98,17 @@ class TaskFinishView(TaskBaseView):
 
 class TaskDeleteView(TaskBaseView, DeleteView):
     """View to delete a Task"""
+    
+class CategoryBaseView(LoginRequiredMixin, View):
+    model = Category
+    success_url = reverse_lazy('tasks:all')
+    fields = "__all__"
+    
+class CategoryCreateView(CategoryBaseView, CreateView):
+    def form_valid(self, form):
+        if form.is_valid():
+            form.instance.app_user = AppUser.objects.get(user=self.request.user)
+            form.save()
+        else:
+            print(form.errors)
+        return super(CategoryCreateView, self).form_valid(form)
