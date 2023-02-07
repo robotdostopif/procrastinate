@@ -13,7 +13,7 @@ class Task(models.Model):
     is_finished = models.BooleanField(default=False, blank=True)
     created = models.DateTimeField(default=timezone.now(), blank=True)
     finished_at = models.DateTimeField(null=True, blank=True)
-    planning_user = models.ForeignKey('PlanningUser', on_delete=models.CASCADE)
+    app_user = models.ForeignKey('AppUser', on_delete=models.CASCADE)
     
     def __str__(self):
         return self.title
@@ -21,12 +21,13 @@ class Task(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
+    app_user = models.ForeignKey('AppUser', on_delete=models.CASCADE, null=True, blank=True)
     
     def __str__(self):
         return self.title
     
     
-class PlanningUser(models.Model):
+class AppUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200, null=True)
 
