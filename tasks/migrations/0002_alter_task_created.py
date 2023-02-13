@@ -5,15 +5,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tasks', '0001_initial'),
+        ("tasks", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='task',
-            name='created',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2023, 1, 7, 19, 19, 27, 947495, tzinfo=datetime.timezone.utc)),
+            model_name="task",
+            name="created",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(
+                    2023, 1, 7, 19, 19, 27, 947495, tzinfo=datetime.timezone.utc
+                ),
+            ),
         ),
     ]

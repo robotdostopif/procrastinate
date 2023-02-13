@@ -8,7 +8,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -17,33 +16,92 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('description', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("description", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='PlanningUser',
+            name="PlanningUser",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, null=True)),
-                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, null=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('description', models.CharField(max_length=255)),
-                ('priority', models.IntegerField(default=1, validators=[django.core.validators.MaxValueValidator(10), django.core.validators.MinValueValidator(1)])),
-                ('is_finished', models.BooleanField(blank=True, default=False)),
-                ('created', models.DateTimeField(blank=True, default=datetime.datetime(2023, 1, 7, 19, 13, 15, 311509, tzinfo=datetime.timezone.utc))),
-                ('finished_at', models.DateTimeField(blank=True, null=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tasks.category')),
-                ('planning_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tasks.planninguser')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("description", models.CharField(max_length=255)),
+                (
+                    "priority",
+                    models.IntegerField(
+                        default=1,
+                        validators=[
+                            django.core.validators.MaxValueValidator(10),
+                            django.core.validators.MinValueValidator(1),
+                        ],
+                    ),
+                ),
+                ("is_finished", models.BooleanField(blank=True, default=False)),
+                (
+                    "created",
+                    models.DateTimeField(
+                        blank=True,
+                        default=datetime.datetime(
+                            2023, 1, 7, 19, 13, 15, 311509, tzinfo=datetime.timezone.utc
+                        ),
+                    ),
+                ),
+                ("finished_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="tasks.category"
+                    ),
+                ),
+                (
+                    "planning_user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="tasks.planninguser",
+                    ),
+                ),
             ],
         ),
     ]
