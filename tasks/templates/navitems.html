@@ -1,12 +1,18 @@
+{% load static %}
 {% block navitems %}
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0 col-4">
     <li class="nav-item">
-        <a class="nav-link text-secondary" aria-current="page" href={% url "tasks:all" %}>Home</a>
+        <a class="nav-link text-secondary" aria-current="page" href={% url "tasks:all" %}><img src="{% static "img/proclogo.png" %}" style="width:40px;"></img></a>
+    </li>
+</ul>
+<ul class="navbar-nav me-auto mb-2 mb-lg-0 col-4 justify-content-center">
+    <li class="nav-item">
+        <img src="{% static "img/proctext.png" %}" style="width:500px;"></img>
     </li>
 </ul>
 {% if request.user.is_authenticated %}
-    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav ml-auto mb-2 mb-lg-0 col-4 justify-content-end">
         <li class="nav-item">
                 <a class="nav-link text-secondary" aria-current="page"><i class="fa-solid fa-circle-user"></i><spacer> {{request.user.username}}</spacer></a>
         </li>
