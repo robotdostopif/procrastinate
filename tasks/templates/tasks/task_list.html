@@ -1,49 +1,46 @@
 {% extends "tasks/base_page.html" %}
 {% block content %}
-    <div class="container">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">Is Finished</th>
-                    <th scope="col">Finished At</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>        
-            {% for object in object_list %}
-            <tr class="cursor-pointer">
-                <td>{{ object.title }}</td>
-                <td>{{ object.description }}</td>
-                <td>{{ object.priority }}</td>
-                <td>{{ object.category.title }}</td>
-                <td>{{ object.created }}</td>
-                <td>{{ object.is_finished }}</td>
-                <td>{{ object.finished_at }}</td>
-                <td>
-                  <a class="btn btn-sm btn-secondary finish-button" data-finishurl="{% url "tasks:finish" object.id %}">{% if object.is_finished == True %}UnFinish{% else %}Finish{% endif %}</a>
-                  <a class="btn btn-sm btn-secondary edit-button" data-bs-toggle="modal" data-bs-target="#updateTaskModal" data-updateurl="{% url "tasks:update" object.id %}"">Edit</a>
-                  <a class="btn btn-sm btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteTaskConfirmModal" data-deleteurl="{% url "tasks:delete" object.id %}">X</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>No objects yet.</tr>
-            {% endfor %}
-        </table>
-        <div class="row">
-          <div class="col-1">
-              <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createTaskModal">+</a>
-          </div>
-      </div>
+    <div class="container-fluid">
+        <div class="row mx-2">
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th scope="col" class="origa">Title</th>
+                      <th scope="col" class="origa">Description</th>
+                      <th scope="col" class="origa">Priority</th>
+                      <th scope="col" class="origa">Category</th>
+                      <th scope="col" class="origa">Created</th>
+                      <th scope="col" class="origa">Finished</th>
+                      <th scope="col" class="origa">Finished At</th>
+                      <th scope="col" class="origa"></th>
+                  </tr>
+              </thead>        
+              {% for object in object_list %}
+              <tr class="cursor-pointer">
+                  <td>{{ object.title }}</td>
+                  <td>{{ object.description }}</td>
+                  <td>{{ object.priority }}</td>
+                  <td>{{ object.category.title }}</td>
+                  <td>{{ object.created }}</td>
+                  <td>{{ object.is_finished }}</td>
+                  <td>{{ object.finished_at }}</td>
+                  <td>
+                    <a class="btn btn-sm btn-outline-secondary finish-button origa" data-finishurl="{% url "tasks:finish" object.id %}">{% if object.is_finished == True %}UnFinish{% else %}Finish{% endif %}</a>
+                    <a class="btn btn-sm btn-outline-secondary edit-button origa" data-bs-toggle="modal" data-bs-target="#updateTaskModal" data-updateurl="{% url "tasks:update" object.id %}"">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger delete-button origa" data-bs-toggle="modal" data-bs-target="#deleteTaskConfirmModal" data-deleteurl="{% url "tasks:delete" object.id %}">X</a>
+                  </td>
+              </tr>
+              {% empty %}
+              <tr>No objects yet.</tr>
+              {% endfor %}
+          </table>
+        </div>
     </div>
     <div id="createTaskModal" class="modal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Add Task</h5>
+              <h5 class="modal-title origa">Add Task</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -56,7 +53,7 @@
       <div class="modal-dialog modal-sm mt-5">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Category</h5>
+            <h5 class="modal-title origa">Add Category</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -69,7 +66,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Update Task</h5>
+              <h5 class="modal-title origa">Update Task</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id="updateTaskModalBody" class="modal-body">
@@ -81,7 +78,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Delete Confirmation</h5>
+            <h5 class="modal-title origa">Delete Confirmation</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div id="deleteTaskConfirmModalBody" class="modal-body">

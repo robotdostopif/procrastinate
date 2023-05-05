@@ -24,7 +24,7 @@ class CategoryForm(ModelForm):
         self.helper.layout = Layout(
             Field("title"),
             Field("description"),
-            Submit("submit", "Save"),
+            Submit("submit", "Save", css_class="origa"),
         )
 
 
@@ -57,7 +57,7 @@ class TaskForm(ModelForm):
                 )
             ),
             HTML("<br>"),
-            Submit("submit", "Save"),
+            Submit("submit", "Save", css_class="origa"),
         )
 
 

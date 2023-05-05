@@ -14,10 +14,13 @@
 <ul class="navbar-nav ml-auto mb-2 mb-lg-0 col-4 justify-content-end">
         {% if request.user.is_authenticated %}
         <li class="nav-item">
-                <a class="nav-link text-secondary" aria-current="page"><i class="fa-solid fa-circle-user"></i><spacer> {{request.user.username}}</spacer></a>
+            <a class="nav-link text-secondary btn" aria-current="page"><i class="fa-solid fa-circle-user"></i><spacer> {{request.user.username}}</spacer></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-secondary" aria-current="page" href={% url "tasks:logout" %}>Logout</a>
+            <a class="nav-link text-secondary btn" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-secondary btn" aria-current="page" href={% url "tasks:logout" %}>Logout</a>
         </li>
         {% endif %}
 </ul>
